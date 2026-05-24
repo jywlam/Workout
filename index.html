@@ -21,12 +21,12 @@
   --font-d: 'Archivo', sans-serif;
   --font-b: 'Nunito', sans-serif;
 
-  --title-size: clamp(2rem, 6vw, 5.2rem);
-  --h2-size:    clamp(1.4rem, 3.2vw, 2.6rem);
-  --h3-size:    clamp(0.95rem, 2vw, 1.5rem);
-  --body-size:  clamp(0.78rem, 1.25vw, 1rem);
-  --sm-size:    clamp(0.65rem, 1vw, 0.8rem);
-  --lbl-size:   clamp(0.55rem, 0.82vw, 0.68rem);
+  --title-size: clamp(2.5rem, 6.5vw, 5.8rem);
+  --h2-size:    clamp(1.7rem, 3.8vw, 3rem);
+  --h3-size:    clamp(1.1rem, 2.3vw, 1.8rem);
+  --body-size:  clamp(1rem, 1.55vw, 1.25rem);
+  --sm-size:    clamp(0.85rem, 1.25vw, 1rem);
+  --lbl-size:   clamp(0.72rem, 1.05vw, 0.86rem);
 
   --pad:   clamp(1.8rem, 4.5vw, 4.5rem);
   --gap:   clamp(0.7rem, 1.6vw, 1.6rem);
@@ -171,8 +171,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); -w
   display: flex; flex-direction: column; gap: clamp(0.3rem,0.6vh,0.5rem);
 }
 .gc .cn { font-family: var(--font-d); font-size: var(--lbl-size); font-weight: 700; color: var(--red); letter-spacing: 0.15em; }
-.gc .ct { font-family: var(--font-d); font-size: clamp(0.78rem,1.2vw,0.94rem); font-weight: 700; color: var(--text); line-height: 1.2; }
-.gc .cd { font-family: var(--font-b); font-size: clamp(0.65rem,1vw,0.8rem); font-weight: 300; color: var(--muted); line-height: 1.55; }
+.gc .ct { font-family: var(--font-d); font-size: clamp(0.92rem,1.35vw,1.08rem); font-weight: 700; color: var(--text); line-height: 1.2; }
+.gc .cd { font-family: var(--font-b); font-size: clamp(0.78rem,1.15vw,0.92rem); font-weight: 300; color: var(--muted); line-height: 1.55; }
 
 /* Rule cards (safety) */
 .rc {
@@ -180,8 +180,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); -w
   display: flex; flex-direction: column; gap: clamp(0.3rem,0.7vh,0.6rem);
 }
 .rc .rn { font-family: var(--font-d); font-size: clamp(1.2rem,2.5vw,2rem); font-weight: 900; color: var(--red); line-height: 1; }
-.rc .rt { font-family: var(--font-d); font-size: clamp(0.78rem,1.25vw,0.98rem); font-weight: 800; color: var(--text); }
-.rc .rd { font-family: var(--font-b); font-size: clamp(0.67rem,1.05vw,0.82rem); font-weight: 300; color: var(--muted); line-height: 1.5; }
+.rc .rt { font-family: var(--font-d); font-size: clamp(0.92rem,1.4vw,1.1rem); font-weight: 800; color: var(--text); }
+.rc .rd { font-family: var(--font-b); font-size: clamp(0.82rem,1.22vw,0.98rem); font-weight: 300; color: var(--muted); line-height: 1.5; }
 
 /* === EXERCISE LIST ===================================================== */
 .phase-meta { display: flex; align-items: center; gap: var(--gap); margin-bottom: clamp(0.4rem,1vh,0.8rem); flex-wrap: wrap; }
@@ -199,8 +199,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); -w
 .ex-row.hdr { border-bottom-color: #bbb; padding-bottom: clamp(0.35rem,0.7vh,0.55rem); }
 
 .xi { font-family: var(--font-d); font-size: var(--lbl-size); font-weight: 700; color: var(--red); }
-.xn { font-family: var(--font-d); font-size: clamp(0.74rem,1.15vw,0.9rem); font-weight: 700; color: var(--text); }
-.xs, .xr, .xrest { font-family: var(--font-b); font-size: clamp(0.7rem,1.05vw,0.84rem); color: var(--text); text-align: center; }
+.xn { font-family: var(--font-d); font-size: clamp(0.9rem,1.35vw,1.08rem); font-weight: 700; color: var(--text); }
+.xs, .xr, .xrest { font-family: var(--font-b); font-size: clamp(0.88rem,1.25vw,1.02rem); color: var(--text); text-align: center; }
 .ex-row.hdr .xn, .ex-row.hdr .xs, .ex-row.hdr .xr, .ex-row.hdr .xrest {
   font-family: var(--font-d); font-size: var(--lbl-size); font-weight: 700;
   letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
@@ -219,8 +219,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); -w
 .sc:nth-child(5) { border-color: #2e0900; }
 
 .sn { font-family: var(--font-d); font-size: clamp(1.4rem,3vw,2.4rem); font-weight: 900; color: var(--border); line-height: 1; }
-.st { font-family: var(--font-d); font-size: clamp(0.7rem,1.1vw,0.86rem); font-weight: 800; color: var(--text); line-height: 1.2; }
-.sd { font-family: var(--font-b); font-size: clamp(0.63rem,0.95vw,0.77rem); color: var(--muted); }
+.st { font-family: var(--font-d); font-size: clamp(0.85rem,1.28vw,1.02rem); font-weight: 800; color: var(--text); line-height: 1.2; }
+.sd { font-family: var(--font-b); font-size: clamp(0.76rem,1.1vw,0.9rem); color: var(--muted); }
 
 /* === SCHEDULE ========================================================== */
 .sched { border-top: 2px solid var(--text); margin-top: clamp(0.8rem,2vh,1.8rem); }
@@ -230,7 +230,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); -w
   padding: clamp(0.48rem,1.1vh,0.85rem) 0; border-bottom: 1px solid var(--border);
 }
 .sd2 { font-family: var(--font-d); font-size: var(--lbl-size); font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); }
-.sa { font-family: var(--font-b); font-size: clamp(0.74rem,1.15vw,0.9rem); color: var(--text); }
+.sa { font-family: var(--font-b); font-size: clamp(0.9rem,1.32vw,1.06rem); color: var(--text); }
 .sr.rest .sa { color: var(--muted); font-weight: 300; }
 .sr.active { background: rgba(230,48,0,0.04); }
 
@@ -268,6 +268,28 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); -w
 
 /* Closing ghost number position */
 .col-r .ghost { bottom: calc(-1 * clamp(1rem,2vh,2rem)); right: clamp(1rem,3vw,3rem); }
+
+/* === VIDEO LINKS ======================================================= */
+.yt {
+  display: inline-flex; align-items: center;
+  margin-left: 0.55em; color: var(--red); text-decoration: none;
+  font-size: var(--lbl-size); font-family: var(--font-d);
+  font-weight: 700; letter-spacing: 0.06em;
+  opacity: 0.6; transition: opacity 0.2s, transform 0.2s;
+  white-space: nowrap; vertical-align: middle;
+}
+.yt:hover { opacity: 1; transform: scale(1.08); }
+
+.yt-card {
+  display: inline-flex; align-items: center; gap: 0.35em;
+  margin-top: auto; padding-top: 0.5em;
+  border-top: 1px solid var(--border);
+  color: var(--red); text-decoration: none;
+  font-size: var(--lbl-size); font-family: var(--font-d);
+  font-weight: 700; letter-spacing: 0.08em;
+  opacity: 0.7; transition: opacity 0.2s;
+}
+.yt-card:hover { opacity: 1; }
 
 /* === ANIMATIONS ======================================================== */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s var(--ease-expo), transform 0.65s var(--ease-expo); }
@@ -611,19 +633,19 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); -w
         <span class="xrest">Rest</span>
       </div>
       <div class="ex-row">
-        <span class="xi">01</span><span class="xn">Chair-Assisted Squat</span><span class="xs">2</span><span class="xr">10–12</span><span class="xrest">90s</span>
+        <span class="xi">01</span><span class="xn">Chair-Assisted Squat <a href="https://www.youtube.com/results?search_query=chair+squat+exercise+seniors" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">2</span><span class="xr">10–12</span><span class="xrest">90s</span>
       </div>
       <div class="ex-row">
-        <span class="xi">02</span><span class="xn">Wall Push-Up</span><span class="xs">2</span><span class="xr">10–12</span><span class="xrest">90s</span>
+        <span class="xi">02</span><span class="xn">Wall Push-Up <a href="https://www.youtube.com/results?search_query=wall+push+up+exercise+seniors" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">2</span><span class="xr">10–12</span><span class="xrest">90s</span>
       </div>
       <div class="ex-row">
-        <span class="xi">03</span><span class="xn">Resistance Band Row</span><span class="xs">2</span><span class="xr">12</span><span class="xrest">90s</span>
+        <span class="xi">03</span><span class="xn">Resistance Band Row <a href="https://www.youtube.com/results?search_query=resistance+band+row+exercise+seniors" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">2</span><span class="xr">12</span><span class="xrest">90s</span>
       </div>
       <div class="ex-row">
-        <span class="xi">04</span><span class="xn">Standing Calf Raise</span><span class="xs">2</span><span class="xr">15</span><span class="xrest">60s</span>
+        <span class="xi">04</span><span class="xn">Standing Calf Raise <a href="https://www.youtube.com/results?search_query=standing+calf+raise+exercise+seniors" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">2</span><span class="xr">15</span><span class="xrest">60s</span>
       </div>
       <div class="ex-row">
-        <span class="xi">05</span><span class="xn">Bird-Dog</span><span class="xs">2</span><span class="xr">8 each side</span><span class="xrest">60s</span>
+        <span class="xi">05</span><span class="xn">Bird-Dog <a href="https://www.youtube.com/results?search_query=bird+dog+exercise+seniors+form" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">2</span><span class="xr">8 each side</span><span class="xrest">60s</span>
       </div>
     </div>
   </div>
@@ -653,19 +675,19 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); -w
         <span class="xrest">Rest</span>
       </div>
       <div class="ex-row">
-        <span class="xi">01</span><span class="xn">Goblet Squat</span><span class="xs">3</span><span class="xr">10–12</span><span class="xrest">90s</span>
+        <span class="xi">01</span><span class="xn">Goblet Squat <a href="https://www.youtube.com/results?search_query=goblet+squat+exercise+seniors" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">3</span><span class="xr">10–12</span><span class="xrest">90s</span>
       </div>
       <div class="ex-row">
-        <span class="xi">02</span><span class="xn">Modified Push-Up (Knees)</span><span class="xs">3</span><span class="xr">10–12</span><span class="xrest">90s</span>
+        <span class="xi">02</span><span class="xn">Modified Push-Up (Knees) <a href="https://www.youtube.com/results?search_query=knee+push+up+exercise+seniors" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">3</span><span class="xr">10–12</span><span class="xrest">90s</span>
       </div>
       <div class="ex-row">
-        <span class="xi">03</span><span class="xn">Dumbbell Row</span><span class="xs">3</span><span class="xr">12</span><span class="xrest">90s</span>
+        <span class="xi">03</span><span class="xn">Dumbbell Row <a href="https://www.youtube.com/results?search_query=dumbbell+row+exercise+seniors" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">3</span><span class="xr">12</span><span class="xrest">90s</span>
       </div>
       <div class="ex-row">
-        <span class="xi">04</span><span class="xn">Bicep Curl</span><span class="xs">3</span><span class="xr">12</span><span class="xrest">60s</span>
+        <span class="xi">04</span><span class="xn">Bicep Curl <a href="https://www.youtube.com/results?search_query=bicep+curl+exercise+seniors+form" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">3</span><span class="xr">12</span><span class="xrest">60s</span>
       </div>
       <div class="ex-row">
-        <span class="xi">05</span><span class="xn">Dead Bug</span><span class="xs">3</span><span class="xr">8 each side</span><span class="xrest">60s</span>
+        <span class="xi">05</span><span class="xn">Dead Bug <a href="https://www.youtube.com/results?search_query=dead+bug+exercise+seniors" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">3</span><span class="xr">8 each side</span><span class="xrest">60s</span>
       </div>
     </div>
   </div>
@@ -695,19 +717,19 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); -w
         <span class="xrest">Rest</span>
       </div>
       <div class="ex-row">
-        <span class="xi">01</span><span class="xn">Dumbbell Squat</span><span class="xs">3</span><span class="xr">12</span><span class="xrest">75s</span>
+        <span class="xi">01</span><span class="xn">Dumbbell Squat <a href="https://www.youtube.com/results?search_query=dumbbell+squat+exercise+seniors" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">3</span><span class="xr">12</span><span class="xrest">75s</span>
       </div>
       <div class="ex-row">
-        <span class="xi">02</span><span class="xn">Full Push-Up</span><span class="xs">3</span><span class="xr">10</span><span class="xrest">75s</span>
+        <span class="xi">02</span><span class="xn">Full Push-Up <a href="https://www.youtube.com/results?search_query=push+up+exercise+seniors+proper+form" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">3</span><span class="xr">10</span><span class="xrest">75s</span>
       </div>
       <div class="ex-row">
-        <span class="xi">03</span><span class="xn">Bent-Over Dumbbell Row</span><span class="xs">3</span><span class="xr">12</span><span class="xrest">75s</span>
+        <span class="xi">03</span><span class="xn">Bent-Over Dumbbell Row <a href="https://www.youtube.com/results?search_query=bent+over+dumbbell+row+seniors" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">3</span><span class="xr">12</span><span class="xrest">75s</span>
       </div>
       <div class="ex-row">
-        <span class="xi">04</span><span class="xn">Seated Overhead Press</span><span class="xs">3</span><span class="xr">10</span><span class="xrest">75s</span>
+        <span class="xi">04</span><span class="xn">Seated Overhead Press <a href="https://www.youtube.com/results?search_query=seated+overhead+press+seniors+dumbbell" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">3</span><span class="xr">10</span><span class="xrest">75s</span>
       </div>
       <div class="ex-row">
-        <span class="xi">05</span><span class="xn">Step-Up (Chair Height)</span><span class="xs">3</span><span class="xr">10 each</span><span class="xrest">75s</span>
+        <span class="xi">05</span><span class="xn">Step-Up (Chair Height) <a href="https://www.youtube.com/results?search_query=step+up+exercise+seniors+chair" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">3</span><span class="xr">10 each</span><span class="xrest">75s</span>
       </div>
     </div>
   </div>
@@ -737,19 +759,19 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); -w
         <span class="xrest">Rest</span>
       </div>
       <div class="ex-row">
-        <span class="xi">01</span><span class="xn">Dumbbell Squat</span><span class="xs">4</span><span class="xr">12</span><span class="xrest">60s</span>
+        <span class="xi">01</span><span class="xn">Dumbbell Squat <a href="https://www.youtube.com/results?search_query=dumbbell+squat+exercise+seniors" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">4</span><span class="xr">12</span><span class="xrest">60s</span>
       </div>
       <div class="ex-row">
-        <span class="xi">02</span><span class="xn">Push-Up</span><span class="xs">4</span><span class="xr">12</span><span class="xrest">60s</span>
+        <span class="xi">02</span><span class="xn">Push-Up <a href="https://www.youtube.com/results?search_query=push+up+exercise+seniors+proper+form" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">4</span><span class="xr">12</span><span class="xrest">60s</span>
       </div>
       <div class="ex-row">
-        <span class="xi">03</span><span class="xn">Dumbbell Row</span><span class="xs">4</span><span class="xr">12</span><span class="xrest">60s</span>
+        <span class="xi">03</span><span class="xn">Dumbbell Row <a href="https://www.youtube.com/results?search_query=dumbbell+row+exercise+seniors" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">4</span><span class="xr">12</span><span class="xrest">60s</span>
       </div>
       <div class="ex-row">
-        <span class="xi">04</span><span class="xn">Overhead Press</span><span class="xs">4</span><span class="xr">10</span><span class="xrest">60s</span>
+        <span class="xi">04</span><span class="xn">Overhead Press <a href="https://www.youtube.com/results?search_query=seated+overhead+press+seniors+dumbbell" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">4</span><span class="xr">10</span><span class="xrest">60s</span>
       </div>
       <div class="ex-row">
-        <span class="xi">05</span><span class="xn">Reverse Lunge</span><span class="xs">4</span><span class="xr">10 each</span><span class="xrest">60s</span>
+        <span class="xi">05</span><span class="xn">Reverse Lunge <a href="https://www.youtube.com/results?search_query=reverse+lunge+exercise+seniors" target="_blank" rel="noopener" class="yt">▶ Watch</a></span><span class="xs">4</span><span class="xr">10 each</span><span class="xrest">60s</span>
       </div>
     </div>
   </div>
@@ -767,31 +789,37 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); -w
         <span class="cn">SQUAT</span>
         <span class="ct">Goblet / Dumbbell Squat</span>
         <span class="cd">Hold weight at chest. Feet shoulder-width apart. Lower until thighs parallel. Drive through heels to stand.</span>
+        <a href="https://www.youtube.com/results?search_query=goblet+squat+exercise+seniors" target="_blank" rel="noopener" class="yt-card">▶ Watch on YouTube</a>
       </div>
       <div class="gc">
         <span class="cn">PUSH</span>
         <span class="ct">Push-Up (Wall → Modified → Full)</span>
         <span class="cd">Straight body line from head to heels. Lower chest to floor. Elbows at 45° — not flared wide.</span>
+        <a href="https://www.youtube.com/results?search_query=push+up+exercise+seniors+proper+form" target="_blank" rel="noopener" class="yt-card">▶ Watch on YouTube</a>
       </div>
       <div class="gc">
         <span class="cn">PULL</span>
         <span class="ct">Dumbbell Row</span>
         <span class="cd">Hinge at hips, back flat. Drive elbow toward hip — not up and back. Squeeze shoulder blade at top.</span>
+        <a href="https://www.youtube.com/results?search_query=dumbbell+row+exercise+seniors" target="_blank" rel="noopener" class="yt-card">▶ Watch on YouTube</a>
       </div>
       <div class="gc">
         <span class="cn">PRESS</span>
         <span class="ct">Overhead Press (Seated)</span>
         <span class="cd">Sit tall, core tight. Press dumbbells overhead to full extension. Lower with control to shoulder height.</span>
+        <a href="https://www.youtube.com/results?search_query=seated+overhead+press+seniors+dumbbell" target="_blank" rel="noopener" class="yt-card">▶ Watch on YouTube</a>
       </div>
       <div class="gc">
         <span class="cn">CORE</span>
         <span class="ct">Bird-Dog</span>
         <span class="cd">On hands and knees, extend opposite arm and leg. Hold 3 seconds. Keep hips level throughout.</span>
+        <a href="https://www.youtube.com/results?search_query=bird+dog+exercise+seniors+form" target="_blank" rel="noopener" class="yt-card">▶ Watch on YouTube</a>
       </div>
       <div class="gc">
         <span class="cn">HINGE</span>
         <span class="ct">Step-Up</span>
         <span class="cd">Place full foot on step. Drive through front heel to stand. Full hip extension at top. Step down with control.</span>
+        <a href="https://www.youtube.com/results?search_query=step+up+exercise+seniors+chair" target="_blank" rel="noopener" class="yt-card">▶ Watch on YouTube</a>
       </div>
     </div>
   </div>
