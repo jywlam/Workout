@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Senior Strength Program</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+
+/* === THEME: Swiss Modern =============================================== */
+:root {
+  --bg: #ffffff;
+  --text: #0a0a0a;
+  --muted: #666;
+  --red: #e63000;
+  --border: #e0e0e0;
+  --grid: rgba(0,0,0,0.032);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-swift: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --font-d: 'Archivo', sans-serif;
+  --font-b: 'Nunito', sans-serif;
+
+  --title-size: clamp(2rem, 6vw, 5.2rem);
+  --h2-size:    clamp(1.4rem, 3.2vw, 2.6rem);
+  --h3-size:    clamp(0.95rem, 2vw, 1.5rem);
+  --body-size:  clamp(0.78rem, 1.25vw, 1rem);
+  --sm-size:    clamp(0.65rem, 1vw, 0.8rem);
+  --lbl-size:   clamp(0.55rem, 0.82vw, 0.68rem);
+
+  --pad:   clamp(1.8rem, 4.5vw, 4.5rem);
+  --gap:   clamp(0.7rem, 1.6vw, 1.6rem);
+  --egap:  clamp(0.35rem, 0.8vw, 0.8rem);
+}
+
+/* === VIEWPORT BASE (mandatory) ========================================= */
+html, body { height: 100%; overflow-x: hidden; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+.slide {
+  width: 100vw; height: 100vh; height: 100dvh;
+  overflow: hidden; scroll-snap-align: start;
+  display: flex; flex-direction: column; position: relative;
+}
+.slide-content {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: center; max-height: 100%;
+  overflow: hidden; padding: var(--pad);
+}
+img, .image-container { max-width: 100%; max-height: min(50vh,400px); object-fit: contain; }
+
+@media (max-height: 700px) {
+  :root { --pad: clamp(0.75rem,3vw,2rem); --title-size: clamp(1.25rem,4.5vw,2.5rem); --h2-size: clamp(1rem,3vw,1.75rem); }
+}
+@media (max-height: 600px) {
+  :root { --pad: clamp(0.5rem,2.5vw,1.5rem); --body-size: clamp(0.7rem,1.2vw,0.95rem); }
+  .nav-dots, .key-hint { display: none; }
+}
+@media (max-height: 500px) {
+  :root { --pad: clamp(0.4rem,2vw,1rem); --title-size: clamp(1rem,3.5vw,1.5rem); }
+}
+@media (max-width: 700px) {
+  .two-col { grid-template-columns: 1fr !important; overflow-y: auto !important; }
+  .col-l { border-right: none !important; border-bottom: 1px solid var(--border); }
+  .card-grid.g3 { grid-template-columns: 1fr 1fr !important; }
+  .step-flow { grid-template-columns: 1fr 1fr !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* === BASE ============================================================== */
+body { background: var(--bg); color: var(--text); font-family: var(--font-b); -webkit-font-smoothing: antialiased; }
+
+/* Grid overlay on every slide */
+.slide::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: clamp(40px,5.5vw,65px) clamp(40px,5.5vw,65px);
+}
+
+/* Red stripe — animates in when slide becomes visible */
+.slide::after {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+  background: var(--red); transform-origin: left; transform: scaleX(0);
+  transition: transform 0.8s var(--ease-swift);
+}
+.slide.visible::after { transform: scaleX(1); }
+
+/* === TYPOGRAPHY ======================================================== */
+.lbl {
+  font-family: var(--font-d); font-size: var(--lbl-size); font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--red);
+  margin-bottom: clamp(0.5rem,1.4vh,1.2rem);
+}
+.lbl span { color: var(--muted); font-weight: 400; }
+
+.t1 {
+  font-family: var(--font-d); font-size: var(--title-size); font-weight: 900;
+  line-height: 0.92; letter-spacing: -0.03em; color: var(--text);
+}
+.t1 .acc { color: var(--red); display: block; }
+
+.t2 {
+  font-family: var(--font-d); font-size: var(--h2-size); font-weight: 800;
+  line-height: 1.05; letter-spacing: -0.025em; color: var(--text);
+}
+
+.t3 {
+  font-family: var(--font-d); font-size: var(--h3-size); font-weight: 700;
+  letter-spacing: -0.01em; color: var(--text);
+}
+
+.body { font-family: var(--font-b); font-size: var(--body-size); font-weight: 300; line-height: 1.75; color: var(--muted); }
+
+/* === LAYOUT: TWO COLUMN ================================================ */
+.two-col { display: grid; height: 100%; overflow: hidden; }
+.two-col.split60 { grid-template-columns: 1.2fr 0.8fr; }
+.two-col.split50 { grid-template-columns: 1fr 1fr; }
+
+.col-l {
+  padding: var(--pad); border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; justify-content: center; overflow: hidden;
+}
+.col-r {
+  padding: var(--pad); display: flex; flex-direction: column;
+  justify-content: center; overflow: hidden; position: relative;
+}
+
+/* === PILLS ============================================================= */
+.pill-row { display: flex; flex-wrap: wrap; gap: var(--egap); margin-top: clamp(0.8rem,1.8vh,1.5rem); }
+.pill {
+  font-family: var(--font-d); font-size: var(--lbl-size); font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.3em 0.85em; border: 1.5px solid var(--text); color: var(--text); white-space: nowrap;
+}
+.pill.f { background: var(--text); color: #fff; }
+.pill.r { border-color: var(--red); color: var(--red); }
+
+/* === STAT BOXES ======================================================== */
+.stat-group { display: flex; gap: clamp(1rem,3vw,2.5rem); flex-wrap: wrap; }
+.stat-box { display: flex; flex-direction: column; gap: 3px; }
+.stat-n {
+  font-family: var(--font-d); font-size: clamp(1.8rem,4.5vw,3.5rem);
+  font-weight: 900; color: var(--text); line-height: 1; letter-spacing: -0.03em;
+}
+.stat-n .r { color: var(--red); }
+.stat-l {
+  font-family: var(--font-d); font-size: var(--lbl-size); font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted);
+  border-top: 2px solid var(--text); padding-top: clamp(3px,0.5vh,6px);
+}
+
+/* === GHOST NUMBER (decorative) ======================================== */
+.ghost {
+  position: absolute; font-family: var(--font-d); font-weight: 900; color: var(--red);
+  opacity: 0.055; line-height: 1; letter-spacing: -0.05em;
+  pointer-events: none; user-select: none;
+  font-size: clamp(8rem,24vw,20rem);
+}
+
+/* === CARD GRIDS ======================================================== */
+.card-grid { display: grid; gap: clamp(0.55rem,1.4vw,1.1rem); margin-top: clamp(0.8rem,2vh,1.8rem); }
+.card-grid.g3 { grid-template-columns: repeat(3,1fr); }
+.card-grid.g2 { grid-template-columns: repeat(2,1fr); }
+
+.gc {
+  padding: clamp(0.8rem,1.7vw,1.3rem); border: 1.5px solid var(--border);
+  display: flex; flex-direction: column; gap: clamp(0.3rem,0.6vh,0.5rem);
+}
+.gc .cn { font-family: var(--font-d); font-size: var(--lbl-size); font-weight: 700; color: var(--red); letter-spacing: 0.15em; }
+.gc .ct { font-family: var(--font-d); font-size: clamp(0.78rem,1.2vw,0.94rem); font-weight: 700; color: var(--text); line-height: 1.2; }
+.gc .cd { font-family: var(--font-b); font-size: clamp(0.65rem,1vw,0.8rem); font-weight: 300; color: var(--muted); line-height: 1.55; }
+
+/* Rule cards (safety) */
+.rc {
+  padding: clamp(0.9rem,2vw,1.5rem); border: 1.5px solid var(--text);
+  display: flex; flex-direction: column; gap: clamp(0.3rem,0.7vh,0.6rem);
+}
+.rc .rn { font-family: var(--font-d); font-size: clamp(1.2rem,2.5vw,2rem); font-weight: 900; color: var(--red); line-height: 1; }
+.rc .rt { font-family: var(--font-d); font-size: clamp(0.78rem,1.25vw,0.98rem); font-weight: 800; color: var(--text); }
+.rc .rd { font-family: var(--font-b); font-size: clamp(0.67rem,1.05vw,0.82rem); font-weight: 300; color: var(--muted); line-height: 1.5; }
+
+/* === EXERCISE LIST ===================================================== */
+.phase-meta { display: flex; align-items: center; gap: var(--gap); margin-bottom: clamp(0.4rem,1vh,0.8rem); flex-wrap: wrap; }
+.pw { font-family: var(--font-d); font-size: var(--lbl-size); font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+.ex-list { border-top: 2px solid var(--text); margin-top: clamp(0.6rem,1.5vh,1.2rem); }
+
+.ex-row {
+  display: grid;
+  grid-template-columns: clamp(18px,2.2vw,26px) 1fr clamp(52px,8vw,90px) clamp(65px,10vw,110px) clamp(50px,7.5vw,80px);
+  align-items: center; gap: clamp(0.5rem,1.2vw,1rem);
+  padding: clamp(0.55rem,1.3vh,1rem) 0;
+  border-bottom: 1px solid var(--border);
+}
+.ex-row.hdr { border-bottom-color: #bbb; padding-bottom: clamp(0.35rem,0.7vh,0.55rem); }
+
+.xi { font-family: var(--font-d); font-size: var(--lbl-size); font-weight: 700; color: var(--red); }
+.xn { font-family: var(--font-d); font-size: clamp(0.74rem,1.15vw,0.9rem); font-weight: 700; color: var(--text); }
+.xs, .xr, .xrest { font-family: var(--font-b); font-size: clamp(0.7rem,1.05vw,0.84rem); color: var(--text); text-align: center; }
+.ex-row.hdr .xn, .ex-row.hdr .xs, .ex-row.hdr .xr, .ex-row.hdr .xrest {
+  font-family: var(--font-d); font-size: var(--lbl-size); font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+}
+
+/* === STEP FLOW (warm-up) =============================================== */
+.step-flow { display: grid; grid-template-columns: repeat(5,1fr); gap: clamp(0.5rem,1.3vw,1rem); margin-top: clamp(1rem,2.5vh,2rem); }
+.sc {
+  display: flex; flex-direction: column; gap: clamp(0.35rem,0.7vh,0.6rem);
+  padding: clamp(0.9rem,1.8vw,1.4rem); border-top: 3px solid;
+}
+.sc:nth-child(1) { border-color: #e63000; }
+.sc:nth-child(2) { border-color: #b82600; }
+.sc:nth-child(3) { border-color: #8a1c00; }
+.sc:nth-child(4) { border-color: #5c1200; }
+.sc:nth-child(5) { border-color: #2e0900; }
+
+.sn { font-family: var(--font-d); font-size: clamp(1.4rem,3vw,2.4rem); font-weight: 900; color: var(--border); line-height: 1; }
+.st { font-family: var(--font-d); font-size: clamp(0.7rem,1.1vw,0.86rem); font-weight: 800; color: var(--text); line-height: 1.2; }
+.sd { font-family: var(--font-b); font-size: clamp(0.63rem,0.95vw,0.77rem); color: var(--muted); }
+
+/* === SCHEDULE ========================================================== */
+.sched { border-top: 2px solid var(--text); margin-top: clamp(0.8rem,2vh,1.8rem); }
+.sr {
+  display: grid; grid-template-columns: clamp(38px,6.5vw,65px) 1fr;
+  align-items: center; gap: clamp(0.7rem,1.8vw,1.4rem);
+  padding: clamp(0.48rem,1.1vh,0.85rem) 0; border-bottom: 1px solid var(--border);
+}
+.sd2 { font-family: var(--font-d); font-size: var(--lbl-size); font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); }
+.sa { font-family: var(--font-b); font-size: clamp(0.74rem,1.15vw,0.9rem); color: var(--text); }
+.sr.rest .sa { color: var(--muted); font-weight: 300; }
+.sr.active { background: rgba(230,48,0,0.04); }
+
+/* === CHECK LIST ======================================================== */
+.check { display: flex; flex-direction: column; gap: clamp(0.5rem,1.2vh,1rem); margin-top: clamp(0.8rem,1.8vh,1.5rem); }
+.ci { display: flex; gap: clamp(0.6rem,1.2vw,1rem); align-items: flex-start; }
+.cm { font-family: var(--font-d); font-size: var(--body-size); font-weight: 900; color: var(--red); flex-shrink: 0; line-height: 1.7; }
+.ct { font-family: var(--font-b); font-size: var(--body-size); font-weight: 300; color: var(--text); line-height: 1.65; }
+.ct strong { font-weight: 700; }
+
+/* === PHASE TIMELINE ==================================================== */
+.phase-tl { display: grid; grid-template-columns: repeat(4,1fr); gap: clamp(0.4rem,1vw,0.8rem); margin-top: clamp(1.2rem,3vh,2.5rem); }
+.ptb { padding: clamp(0.7rem,1.5vw,1.2rem); border-top: 3px solid; display: flex; flex-direction: column; gap: 3px; }
+.ptb:nth-child(1) { border-color: #e63000; }
+.ptb:nth-child(2) { border-color: #b82600; }
+.ptb:nth-child(3) { border-color: #8a1c00; }
+.ptb:nth-child(4) { border-color: #5c1200; }
+.ptb .pn { font-family: var(--font-d); font-size: var(--lbl-size); font-weight: 700; letter-spacing: 0.15em; color: var(--red); }
+.ptb:nth-child(2) .pn { color: #b82600; }
+.ptb:nth-child(3) .pn { color: #8a1c00; }
+.ptb:nth-child(4) .pn { color: #5c1200; }
+.ptb .ptitle { font-family: var(--font-d); font-size: clamp(0.74rem,1.2vw,0.94rem); font-weight: 800; color: var(--text); }
+.ptb .pw2 { font-family: var(--font-b); font-size: clamp(0.62rem,0.95vw,0.75rem); font-weight: 300; color: var(--muted); }
+
+/* === QUOTE / CTA ======================================================= */
+.q-block { border-left: 3px solid var(--red); padding-left: clamp(0.8rem,1.8vw,1.5rem); margin-top: clamp(1.2rem,3vh,2.5rem); }
+.q-text { font-family: var(--font-d); font-size: clamp(0.82rem,1.4vw,1.08rem); font-weight: 700; font-style: italic; color: var(--text); line-height: 1.4; }
+.q-attr { font-family: var(--font-b); font-size: var(--lbl-size); color: var(--muted); margin-top: clamp(0.25rem,0.5vh,0.45rem); letter-spacing: 0.08em; }
+
+.big-stat { font-family: var(--font-d); font-size: clamp(4rem,12vw,9rem); font-weight: 900; color: var(--red); line-height: 1; letter-spacing: -0.04em; }
+.big-stat-l { font-family: var(--font-b); font-size: var(--body-size); color: var(--muted); margin-top: clamp(0.3rem,0.7vh,0.6rem); max-width: 260px; line-height: 1.6; }
+
+.cta-big { font-family: var(--font-d); font-size: clamp(2.5rem,6vw,5rem); font-weight: 900; color: var(--red); line-height: 1; letter-spacing: -0.03em; margin-top: clamp(1.2rem,3vh,2.5rem); }
+.cta-sub { font-family: var(--font-b); font-size: var(--body-size); color: var(--muted); margin-top: clamp(0.3rem,0.8vh,0.7rem); }
+
+/* Closing ghost number position */
+.col-r .ghost { bottom: calc(-1 * clamp(1rem,2vh,2rem)); right: clamp(1rem,3vw,3rem); }
+
+/* === ANIMATIONS ======================================================== */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s var(--ease-expo), transform 0.65s var(--ease-expo); }
+.reveal-l { opacity: 0; transform: translateX(-28px); transition: opacity 0.65s var(--ease-expo), transform 0.65s var(--ease-expo); }
+.reveal-s { opacity: 0; transform: scale(0.93); transition: opacity 0.6s var(--ease-expo), transform 0.6s var(--ease-expo); }
+.slide.visible .reveal, .slide.visible .reveal-l, .slide.visible .reveal-s { opacity: 1; transform: none; }
+
+.reveal:nth-child(1) { transition-delay: 0.08s; } .reveal:nth-child(2) { transition-delay: 0.18s; }
+.reveal:nth-child(3) { transition-delay: 0.28s; } .reveal:nth-child(4) { transition-delay: 0.38s; }
+.reveal:nth-child(5) { transition-delay: 0.48s; } .reveal:nth-child(6) { transition-delay: 0.56s; }
+.reveal-l:nth-child(1) { transition-delay: 0.08s; } .reveal-l:nth-child(2) { transition-delay: 0.18s; }
+.reveal-l:nth-child(3) { transition-delay: 0.28s; } .reveal-l:nth-child(4) { transition-delay: 0.38s; }
+.reveal-l:nth-child(5) { transition-delay: 0.48s; } .reveal-l:nth-child(6) { transition-delay: 0.56s; }
+
+/* Card grid stagger */
+.card-grid .gc { opacity: 0; transform: translateY(14px); transition: opacity 0.5s var(--ease-expo), transform 0.5s var(--ease-expo); }
+.card-grid .gc:nth-child(1) { transition-delay: 0.1s; } .card-grid .gc:nth-child(2) { transition-delay: 0.17s; }
+.card-grid .gc:nth-child(3) { transition-delay: 0.24s; } .card-grid .gc:nth-child(4) { transition-delay: 0.31s; }
+.card-grid .gc:nth-child(5) { transition-delay: 0.38s; } .card-grid .gc:nth-child(6) { transition-delay: 0.45s; }
+.slide.visible .card-grid .gc { opacity: 1; transform: none; }
+
+/* Rule card stagger */
+.card-grid .rc { opacity: 0; transform: translateY(14px); transition: opacity 0.5s var(--ease-expo), transform 0.5s var(--ease-expo); }
+.card-grid .rc:nth-child(1) { transition-delay: 0.1s; } .card-grid .rc:nth-child(2) { transition-delay: 0.2s; }
+.card-grid .rc:nth-child(3) { transition-delay: 0.3s; } .card-grid .rc:nth-child(4) { transition-delay: 0.4s; }
+.slide.visible .card-grid .rc { opacity: 1; transform: none; }
+
+/* Exercise row stagger */
+.ex-list .ex-row:not(.hdr) { opacity: 0; transform: translateX(-18px); transition: opacity 0.45s var(--ease-expo), transform 0.45s var(--ease-expo); }
+.ex-list .ex-row:not(.hdr):nth-child(2) { transition-delay: 0.15s; }
+.ex-list .ex-row:not(.hdr):nth-child(3) { transition-delay: 0.24s; }
+.ex-list .ex-row:not(.hdr):nth-child(4) { transition-delay: 0.33s; }
+.ex-list .ex-row:not(.hdr):nth-child(5) { transition-delay: 0.42s; }
+.ex-list .ex-row:not(.hdr):nth-child(6) { transition-delay: 0.51s; }
+.slide.visible .ex-list .ex-row:not(.hdr) { opacity: 1; transform: none; }
+
+/* Step flow stagger */
+.step-flow .sc { opacity: 0; transform: translateY(14px); transition: opacity 0.45s var(--ease-expo), transform 0.45s var(--ease-expo); }
+.step-flow .sc:nth-child(1) { transition-delay: 0.08s; } .step-flow .sc:nth-child(2) { transition-delay: 0.16s; }
+.step-flow .sc:nth-child(3) { transition-delay: 0.24s; } .step-flow .sc:nth-child(4) { transition-delay: 0.32s; }
+.step-flow .sc:nth-child(5) { transition-delay: 0.40s; }
+.slide.visible .step-flow .sc { opacity: 1; transform: none; }
+
+/* Phase timeline stagger */
+.phase-tl .ptb { opacity: 0; transform: translateY(12px); transition: opacity 0.5s var(--ease-expo), transform 0.5s var(--ease-expo); }
+.phase-tl .ptb:nth-child(1) { transition-delay: 0.1s; } .phase-tl .ptb:nth-child(2) { transition-delay: 0.2s; }
+.phase-tl .ptb:nth-child(3) { transition-delay: 0.3s; } .phase-tl .ptb:nth-child(4) { transition-delay: 0.4s; }
+.slide.visible .phase-tl .ptb { opacity: 1; transform: none; }
+
+/* Schedule rows stagger */
+.sched .sr { opacity: 0; transform: translateX(-14px); transition: opacity 0.4s var(--ease-expo), transform 0.4s var(--ease-expo); }
+.sched .sr:nth-child(1) { transition-delay: 0.15s; } .sched .sr:nth-child(2) { transition-delay: 0.22s; }
+.sched .sr:nth-child(3) { transition-delay: 0.29s; } .sched .sr:nth-child(4) { transition-delay: 0.36s; }
+.sched .sr:nth-child(5) { transition-delay: 0.43s; } .sched .sr:nth-child(6) { transition-delay: 0.50s; }
+.sched .sr:nth-child(7) { transition-delay: 0.57s; }
+.slide.visible .sched .sr { opacity: 1; transform: none; }
+
+/* === NAVIGATION ======================================================== */
+.progress-bar {
+  position: fixed; top: 0; left: 0; width: 0; height: 4px;
+  background: var(--red); z-index: 1000;
+  transition: width 0.4s var(--ease-expo);
+  box-shadow: 0 0 10px rgba(230,48,0,0.45);
+}
+
+.nav-dots {
+  position: fixed; right: clamp(0.9rem,2vw,1.8rem); top: 50%;
+  transform: translateY(-50%); display: flex; flex-direction: column;
+  gap: clamp(6px,1.1vh,10px); z-index: 1000;
+}
+.nav-dot {
+  width: 6px; height: 6px; background: #ddd; cursor: pointer;
+  transition: all 0.3s ease;
+}
+.nav-dot.active { background: var(--red); height: 20px; }
+.nav-dot:hover:not(.active) { background: #aaa; }
+
+.slide-ctr {
+  position: fixed; bottom: clamp(0.9rem,2vh,1.8rem); right: clamp(1.2rem,2.5vw,2.5rem);
+  font-family: var(--font-d); font-size: var(--lbl-size); font-weight: 700;
+  letter-spacing: 0.2em; color: #bbb; z-index: 1000;
+}
+
+.key-hint {
+  position: fixed; bottom: clamp(0.9rem,2vh,1.8rem); left: clamp(1.2rem,2.5vw,2.5rem);
+  font-family: var(--font-b); font-size: var(--lbl-size); color: #ccc;
+  z-index: 1000; letter-spacing: 0.05em;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Fixed navigation -->
+<div class="progress-bar"></div>
+<nav class="nav-dots"></nav>
+<div class="slide-ctr"></div>
+<div class="key-hint">↑↓ or Space to navigate</div>
+
+<!-- ================================================================
+     SLIDE 1: TITLE
+     ================================================================ -->
+<section class="slide" id="s1">
+  <div class="two-col split60">
+    <div class="col-l">
+      <p class="lbl reveal">01 / <span>Program Introduction</span></p>
+      <h1 class="t1 reveal" style="font-size: clamp(3rem,8.5vw,7.5rem);">
+        Senior<br>Strength<br><span class="acc">Program</span>
+      </h1>
+      <p class="body reveal" style="margin-top:clamp(1rem,2.5vh,2rem); max-width:400px;">
+        A complete 8-week muscle-building program designed for active men 60 and beyond — building strength, balance, and vitality safely and progressively.
+      </p>
+    </div>
+    <div class="col-r">
+      <p class="lbl reveal">At a glance</p>
+      <div class="stat-group reveal">
+        <div class="stat-box">
+          <span class="stat-n"><span class="r">8</span></span>
+          <span class="stat-l">Weeks</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-n"><span class="r">3×</span></span>
+          <span class="stat-l">Per week</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-n"><span class="r">60+</span></span>
+          <span class="stat-l">Age group</span>
+        </div>
+      </div>
+      <div class="pill-row reveal">
+        <span class="pill f">Progressive</span>
+        <span class="pill">Home-Friendly</span>
+        <span class="pill">Safe</span>
+      </div>
+      <div class="ghost" style="bottom:calc(-1 * clamp(1rem,2vh,2rem)); right:clamp(0.5rem,2vw,2rem);">60</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 2: THE CHALLENGE
+     ================================================================ -->
+<section class="slide" id="s2">
+  <div class="two-col split50">
+    <div class="col-l">
+      <p class="lbl reveal">01 / <span>The Challenge</span></p>
+      <div class="big-stat reveal">30%</div>
+      <p class="big-stat-l reveal">of adults over 60 have sarcopenia — significant muscle loss that limits daily life and independence.</p>
+      <div class="pill-row reveal">
+        <span class="pill r">Sarcopenia</span>
+        <span class="pill r">Preventable</span>
+      </div>
+    </div>
+    <div class="col-r">
+      <p class="lbl reveal">Why this matters</p>
+      <div class="check reveal">
+        <div class="ci">
+          <span class="cm">—</span>
+          <span class="ct"><strong>We lose 3–5% of muscle mass per decade</strong> after age 30, accelerating after 60</span>
+        </div>
+        <div class="ci">
+          <span class="cm">—</span>
+          <span class="ct">Muscle loss leads to <strong>falls, fractures, and loss of independence</strong></span>
+        </div>
+        <div class="ci">
+          <span class="cm">—</span>
+          <span class="ct">Lower muscle mass is linked to <strong>slower metabolism and chronic disease</strong></span>
+        </div>
+        <div class="ci">
+          <span class="cm">—</span>
+          <span class="ct">The good news: <strong>strength training reverses muscle loss at any age</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 3: BENEFITS
+     ================================================================ -->
+<section class="slide" id="s3">
+  <div class="slide-content">
+    <p class="lbl reveal">02 / <span>Why It Works</span></p>
+    <h2 class="t2 reveal">6 reasons to start today</h2>
+    <div class="card-grid g3">
+      <div class="gc">
+        <span class="cn">01</span>
+        <span class="ct">Rebuild Muscle Mass</span>
+        <span class="cd">Resistance training directly stimulates muscle protein synthesis at any age</span>
+      </div>
+      <div class="gc">
+        <span class="cn">02</span>
+        <span class="ct">Improve Balance &amp; Stability</span>
+        <span class="cd">Stronger legs and core dramatically reduce fall risk</span>
+      </div>
+      <div class="gc">
+        <span class="cn">03</span>
+        <span class="ct">Boost Bone Density</span>
+        <span class="cd">Weight-bearing exercise increases bone mineral density, preventing fractures</span>
+      </div>
+      <div class="gc">
+        <span class="cn">04</span>
+        <span class="ct">Increase Metabolism</span>
+        <span class="cd">Each pound of muscle burns more calories at rest, aiding weight management</span>
+      </div>
+      <div class="gc">
+        <span class="cn">05</span>
+        <span class="ct">Sharpen Mental Clarity</span>
+        <span class="cd">Exercise increases blood flow to the brain and boosts mood-enhancing hormones</span>
+      </div>
+      <div class="gc">
+        <span class="cn">06</span>
+        <span class="ct">Enhance Independence</span>
+        <span class="cd">Functional strength means carrying groceries, climbing stairs, and living freely</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 4: PROGRAM STRUCTURE
+     ================================================================ -->
+<section class="slide" id="s4">
+  <div class="two-col split50">
+    <div class="col-l">
+      <p class="lbl reveal">03 / <span>Program Structure</span></p>
+      <h2 class="t2 reveal">8 weeks.<br>4 progressive phases.</h2>
+      <div class="phase-tl">
+        <div class="ptb"><span class="pn">PHASE 1</span><span class="ptitle">Foundation</span><span class="pw2">Week 1–2</span></div>
+        <div class="ptb"><span class="pn">PHASE 2</span><span class="ptitle">Building</span><span class="pw2">Week 3–4</span></div>
+        <div class="ptb"><span class="pn">PHASE 3</span><span class="ptitle">Strength</span><span class="pw2">Week 5–6</span></div>
+        <div class="ptb"><span class="pn">PHASE 4</span><span class="ptitle">Peak</span><span class="pw2">Week 7–8</span></div>
+      </div>
+    </div>
+    <div class="col-r">
+      <p class="lbl reveal">Session details</p>
+      <div class="check reveal">
+        <div class="ci">
+          <span class="cm">—</span>
+          <span class="ct"><strong>3 sessions per week</strong> — Monday, Wednesday, Friday recommended</span>
+        </div>
+        <div class="ci">
+          <span class="cm">—</span>
+          <span class="ct"><strong>~45 minutes per session</strong> including warm-up and cool-down</span>
+        </div>
+        <div class="ci">
+          <span class="cm">—</span>
+          <span class="ct"><strong>Progressive overload</strong> — weight and volume increase each phase</span>
+        </div>
+        <div class="ci">
+          <span class="cm">—</span>
+          <span class="ct"><strong>Rest days are mandatory</strong> — muscle is built during recovery, not training</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 5: EQUIPMENT
+     ================================================================ -->
+<section class="slide" id="s5">
+  <div class="two-col split50">
+    <div class="col-l">
+      <p class="lbl reveal">04 / <span>What You Need</span></p>
+      <h2 class="t2 reveal">Minimal gear.<br>Maximum results.</h2>
+      <div class="check reveal" style="margin-top:clamp(1rem,2.5vh,2rem);">
+        <div class="ci"><span class="cm">—</span><span class="ct"><strong>Dumbbells</strong> — 5, 10, 15, and 20 lb set</span></div>
+        <div class="ci"><span class="cm">—</span><span class="ct"><strong>Resistance bands</strong> — light and medium resistance</span></div>
+        <div class="ci"><span class="cm">—</span><span class="ct"><strong>Exercise mat</strong> — for floor work</span></div>
+        <div class="ci"><span class="cm">—</span><span class="ct"><strong>Sturdy chair</strong> — for support exercises</span></div>
+        <div class="ci"><span class="cm">—</span><span class="ct"><strong>Water bottle</strong> — hydration is non-negotiable</span></div>
+      </div>
+    </div>
+    <div class="col-r">
+      <p class="lbl reveal">Space &amp; setup</p>
+      <div class="check reveal" style="margin-top:clamp(0.8rem,2vh,1.8rem);">
+        <div class="ci"><span class="cm">—</span><span class="ct"><strong>6×6 ft clear area</strong> — living room or garage works perfectly</span></div>
+        <div class="ci"><span class="cm">—</span><span class="ct"><strong>Non-slip surface</strong> — use a mat or rubber flooring</span></div>
+        <div class="ci"><span class="cm">—</span><span class="ct"><strong>Good lighting</strong> — important for safe form</span></div>
+        <div class="ci"><span class="cm">—</span><span class="ct"><strong>Mirror (optional)</strong> — helps you self-check technique</span></div>
+      </div>
+      <div class="ghost" style="bottom:calc(-1 * clamp(1rem,2vh,2rem)); right:clamp(1rem,3vw,3rem);">5</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 6: SAFETY
+     ================================================================ -->
+<section class="slide" id="s6">
+  <div class="slide-content">
+    <p class="lbl reveal">05 / <span>Before You Begin</span></p>
+    <h2 class="t2 reveal">Four rules. No exceptions.</h2>
+    <div class="card-grid g2" style="margin-top:clamp(1rem,2.5vh,2rem);">
+      <div class="rc">
+        <span class="rn">01</span>
+        <span class="rt">Consult Your Doctor</span>
+        <span class="rd">Especially important if you have heart conditions, joint problems, or haven't exercised in over a year. Get medical clearance first.</span>
+      </div>
+      <div class="rc">
+        <span class="rn">02</span>
+        <span class="rt">Warm Up Every Session</span>
+        <span class="rd">5–10 minutes of light movement before every workout. Cold muscles tear. Warm muscles grow.</span>
+      </div>
+      <div class="rc">
+        <span class="rn">03</span>
+        <span class="rt">Form Over Weight</span>
+        <span class="rd">Never sacrifice technique for heavier loads. Poor form causes injury; injury stops progress. Start light, always.</span>
+      </div>
+      <div class="rc">
+        <span class="rn">04</span>
+        <span class="rt">Listen to Your Body</span>
+        <span class="rd">Sharp pain means stop. Discomfort is normal; pain is a signal. Rest when needed — it's part of the program.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 7: PHASE 1
+     ================================================================ -->
+<section class="slide" id="s7">
+  <div class="slide-content">
+    <p class="lbl reveal">06 / <span>Training Plan</span></p>
+    <div class="phase-meta">
+      <h2 class="t2 reveal">Phase 1: Foundation</h2>
+      <span class="pw reveal">Week 1–2 · 3 Sessions/Week</span>
+    </div>
+    <div class="pill-row reveal" style="margin-top:0; margin-bottom:clamp(0.4rem,1vh,0.8rem);">
+      <span class="pill f">Bodyweight Focus</span>
+      <span class="pill">Learn Movements</span>
+      <span class="pill">Build Habit</span>
+    </div>
+    <div class="ex-list reveal-l">
+      <div class="ex-row hdr">
+        <span class="xi"></span>
+        <span class="xn">Exercise</span>
+        <span class="xs">Sets</span>
+        <span class="xr">Reps</span>
+        <span class="xrest">Rest</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">01</span><span class="xn">Chair-Assisted Squat</span><span class="xs">2</span><span class="xr">10–12</span><span class="xrest">90s</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">02</span><span class="xn">Wall Push-Up</span><span class="xs">2</span><span class="xr">10–12</span><span class="xrest">90s</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">03</span><span class="xn">Resistance Band Row</span><span class="xs">2</span><span class="xr">12</span><span class="xrest">90s</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">04</span><span class="xn">Standing Calf Raise</span><span class="xs">2</span><span class="xr">15</span><span class="xrest">60s</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">05</span><span class="xn">Bird-Dog</span><span class="xs">2</span><span class="xr">8 each side</span><span class="xrest">60s</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 8: PHASE 2
+     ================================================================ -->
+<section class="slide" id="s8">
+  <div class="slide-content">
+    <p class="lbl reveal">07 / <span>Training Plan</span></p>
+    <div class="phase-meta">
+      <h2 class="t2 reveal">Phase 2: Building</h2>
+      <span class="pw reveal">Week 3–4 · 3 Sessions/Week</span>
+    </div>
+    <div class="pill-row reveal" style="margin-top:0; margin-bottom:clamp(0.4rem,1vh,0.8rem);">
+      <span class="pill f">Add Light Dumbbells</span>
+      <span class="pill">5–10 lb</span>
+      <span class="pill">3 Sets</span>
+    </div>
+    <div class="ex-list reveal-l">
+      <div class="ex-row hdr">
+        <span class="xi"></span>
+        <span class="xn">Exercise</span>
+        <span class="xs">Sets</span>
+        <span class="xr">Reps</span>
+        <span class="xrest">Rest</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">01</span><span class="xn">Goblet Squat</span><span class="xs">3</span><span class="xr">10–12</span><span class="xrest">90s</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">02</span><span class="xn">Modified Push-Up (Knees)</span><span class="xs">3</span><span class="xr">10–12</span><span class="xrest">90s</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">03</span><span class="xn">Dumbbell Row</span><span class="xs">3</span><span class="xr">12</span><span class="xrest">90s</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">04</span><span class="xn">Bicep Curl</span><span class="xs">3</span><span class="xr">12</span><span class="xrest">60s</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">05</span><span class="xn">Dead Bug</span><span class="xs">3</span><span class="xr">8 each side</span><span class="xrest">60s</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 9: PHASE 3
+     ================================================================ -->
+<section class="slide" id="s9">
+  <div class="slide-content">
+    <p class="lbl reveal">08 / <span>Training Plan</span></p>
+    <div class="phase-meta">
+      <h2 class="t2 reveal">Phase 3: Strength</h2>
+      <span class="pw reveal">Week 5–6 · 3 Sessions/Week</span>
+    </div>
+    <div class="pill-row reveal" style="margin-top:0; margin-bottom:clamp(0.4rem,1vh,0.8rem);">
+      <span class="pill f">10–15 lb Dumbbells</span>
+      <span class="pill">Full Movements</span>
+      <span class="pill">Less Rest</span>
+    </div>
+    <div class="ex-list reveal-l">
+      <div class="ex-row hdr">
+        <span class="xi"></span>
+        <span class="xn">Exercise</span>
+        <span class="xs">Sets</span>
+        <span class="xr">Reps</span>
+        <span class="xrest">Rest</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">01</span><span class="xn">Dumbbell Squat</span><span class="xs">3</span><span class="xr">12</span><span class="xrest">75s</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">02</span><span class="xn">Full Push-Up</span><span class="xs">3</span><span class="xr">10</span><span class="xrest">75s</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">03</span><span class="xn">Bent-Over Dumbbell Row</span><span class="xs">3</span><span class="xr">12</span><span class="xrest">75s</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">04</span><span class="xn">Seated Overhead Press</span><span class="xs">3</span><span class="xr">10</span><span class="xrest">75s</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">05</span><span class="xn">Step-Up (Chair Height)</span><span class="xs">3</span><span class="xr">10 each</span><span class="xrest">75s</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 10: PHASE 4
+     ================================================================ -->
+<section class="slide" id="s10">
+  <div class="slide-content">
+    <p class="lbl reveal">09 / <span>Training Plan</span></p>
+    <div class="phase-meta">
+      <h2 class="t2 reveal">Phase 4: Peak Performance</h2>
+      <span class="pw reveal">Week 7–8 · 3 Sessions/Week</span>
+    </div>
+    <div class="pill-row reveal" style="margin-top:0; margin-bottom:clamp(0.4rem,1vh,0.8rem);">
+      <span class="pill f">15–20 lb Dumbbells</span>
+      <span class="pill">4 Sets</span>
+      <span class="pill">Maximum Effort</span>
+    </div>
+    <div class="ex-list reveal-l">
+      <div class="ex-row hdr">
+        <span class="xi"></span>
+        <span class="xn">Exercise</span>
+        <span class="xs">Sets</span>
+        <span class="xr">Reps</span>
+        <span class="xrest">Rest</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">01</span><span class="xn">Dumbbell Squat</span><span class="xs">4</span><span class="xr">12</span><span class="xrest">60s</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">02</span><span class="xn">Push-Up</span><span class="xs">4</span><span class="xr">12</span><span class="xrest">60s</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">03</span><span class="xn">Dumbbell Row</span><span class="xs">4</span><span class="xr">12</span><span class="xrest">60s</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">04</span><span class="xn">Overhead Press</span><span class="xs">4</span><span class="xr">10</span><span class="xrest">60s</span>
+      </div>
+      <div class="ex-row">
+        <span class="xi">05</span><span class="xn">Reverse Lunge</span><span class="xs">4</span><span class="xr">10 each</span><span class="xrest">60s</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 11: KEY EXERCISES
+     ================================================================ -->
+<section class="slide" id="s11">
+  <div class="slide-content">
+    <p class="lbl reveal">10 / <span>Exercise Guide</span></p>
+    <h2 class="t2 reveal">The six movements that matter most</h2>
+    <div class="card-grid g3">
+      <div class="gc">
+        <span class="cn">SQUAT</span>
+        <span class="ct">Goblet / Dumbbell Squat</span>
+        <span class="cd">Hold weight at chest. Feet shoulder-width apart. Lower until thighs parallel. Drive through heels to stand.</span>
+      </div>
+      <div class="gc">
+        <span class="cn">PUSH</span>
+        <span class="ct">Push-Up (Wall → Modified → Full)</span>
+        <span class="cd">Straight body line from head to heels. Lower chest to floor. Elbows at 45° — not flared wide.</span>
+      </div>
+      <div class="gc">
+        <span class="cn">PULL</span>
+        <span class="ct">Dumbbell Row</span>
+        <span class="cd">Hinge at hips, back flat. Drive elbow toward hip — not up and back. Squeeze shoulder blade at top.</span>
+      </div>
+      <div class="gc">
+        <span class="cn">PRESS</span>
+        <span class="ct">Overhead Press (Seated)</span>
+        <span class="cd">Sit tall, core tight. Press dumbbells overhead to full extension. Lower with control to shoulder height.</span>
+      </div>
+      <div class="gc">
+        <span class="cn">CORE</span>
+        <span class="ct">Bird-Dog</span>
+        <span class="cd">On hands and knees, extend opposite arm and leg. Hold 3 seconds. Keep hips level throughout.</span>
+      </div>
+      <div class="gc">
+        <span class="cn">HINGE</span>
+        <span class="ct">Step-Up</span>
+        <span class="cd">Place full foot on step. Drive through front heel to stand. Full hip extension at top. Step down with control.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 12: WARM-UP
+     ================================================================ -->
+<section class="slide" id="s12">
+  <div class="slide-content">
+    <p class="lbl reveal">11 / <span>Warm-Up Routine</span></p>
+    <h2 class="t2 reveal">5–10 minutes before every session — non-negotiable</h2>
+    <div class="step-flow">
+      <div class="sc">
+        <span class="sn">01</span>
+        <span class="st">March in Place</span>
+        <span class="sd">2 minutes · High knees, pump arms, wake up the heart</span>
+      </div>
+      <div class="sc">
+        <span class="sn">02</span>
+        <span class="st">Arm Circles</span>
+        <span class="sd">1 minute · Forward then backward, 30s each direction</span>
+      </div>
+      <div class="sc">
+        <span class="sn">03</span>
+        <span class="st">Hip Circles</span>
+        <span class="sd">1 minute · Hands on hips, large slow circles both ways</span>
+      </div>
+      <div class="sc">
+        <span class="sn">04</span>
+        <span class="st">Leg Swings</span>
+        <span class="sd">1 minute · Hold wall, swing each leg forward and back 10×</span>
+      </div>
+      <div class="sc">
+        <span class="sn">05</span>
+        <span class="st">Shoulder Rolls</span>
+        <span class="sd">1 minute · Slow rolls forward then backward, full range</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 13: NUTRITION
+     ================================================================ -->
+<section class="slide" id="s13">
+  <div class="two-col split50">
+    <div class="col-l">
+      <p class="lbl reveal">12 / <span>Nutrition</span></p>
+      <h2 class="t2 reveal">Fuel your<br>muscle growth</h2>
+      <div style="margin-top:clamp(1rem,2.5vh,2rem);">
+        <p class="body reveal" style="color:var(--muted); margin-bottom:clamp(0.5rem,1.2vh,1rem);">Daily protein target</p>
+        <div class="big-stat reveal" style="font-size:clamp(3rem,8vw,6.5rem);">1.4g</div>
+        <p class="big-stat-l reveal">per kg of body weight per day. A 180 lb (82 kg) man needs approximately <strong style="color:var(--text);">115g protein daily</strong>.</p>
+      </div>
+    </div>
+    <div class="col-r">
+      <p class="lbl reveal">Daily principles</p>
+      <div class="check reveal">
+        <div class="ci"><span class="cm">—</span><span class="ct"><strong>Protein at every meal</strong> — aim for 25–35g per sitting</span></div>
+        <div class="ci"><span class="cm">—</span><span class="ct"><strong>8+ glasses of water daily</strong> — more on training days</span></div>
+        <div class="ci"><span class="cm">—</span><span class="ct"><strong>Anti-inflammatory foods</strong> — fatty fish, leafy greens, berries, olive oil</span></div>
+        <div class="ci"><span class="cm">—</span><span class="ct"><strong>Don't skip breakfast</strong> — it sets up protein intake for the day</span></div>
+        <div class="ci"><span class="cm">—</span><span class="ct"><strong>Post-workout protein within 45 min</strong> — the anabolic window is real</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 14: RECOVERY
+     ================================================================ -->
+<section class="slide" id="s14">
+  <div class="slide-content">
+    <p class="lbl reveal">13 / <span>Recovery &amp; Rest</span></p>
+    <h2 class="t2 reveal">Muscle is built during rest, not during training</h2>
+    <div class="card-grid g2" style="margin-top:clamp(1rem,2.5vh,2rem);">
+      <div class="rc">
+        <span class="rn">Zzz</span>
+        <span class="rt">Sleep 7–9 Hours</span>
+        <span class="rd">Growth hormone is released primarily during deep sleep. Poor sleep = poor recovery = poor results. Prioritize it like a workout.</span>
+      </div>
+      <div class="rc">
+        <span class="rn">↻</span>
+        <span class="rt">Respect Rest Days</span>
+        <span class="rd">At least 1–2 full rest days per week. Light walks are fine. Muscle fibres repair and strengthen on off days.</span>
+      </div>
+      <div class="rc">
+        <span class="rn">≋</span>
+        <span class="rt">Stretch After Sessions</span>
+        <span class="rd">5 minutes of gentle stretching after each session. Focus on hamstrings, chest, and shoulders — the muscles you just worked.</span>
+      </div>
+      <div class="rc">
+        <span class="rn">◎</span>
+        <span class="rt">Stay Hydrated All Day</span>
+        <span class="rd">Dehydration significantly impairs muscle recovery. Aim for 3+ litres on training days. Pale urine = well hydrated.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 15: START TODAY
+     ================================================================ -->
+<section class="slide" id="s15">
+  <div class="two-col split50">
+    <div class="col-l">
+      <p class="lbl reveal">14 / <span>Your First Week</span></p>
+      <h2 class="t2 reveal">Week 1 schedule</h2>
+      <div class="sched reveal">
+        <div class="sr active"><span class="sd2">MON</span><span class="sa">Phase 1 — Session A</span></div>
+        <div class="sr rest"><span class="sd2">TUE</span><span class="sa">Rest + 20-min walk</span></div>
+        <div class="sr active"><span class="sd2">WED</span><span class="sa">Phase 1 — Session B</span></div>
+        <div class="sr rest"><span class="sd2">THU</span><span class="sa">Rest + 20-min walk</span></div>
+        <div class="sr active"><span class="sd2">FRI</span><span class="sa">Phase 1 — Session C</span></div>
+        <div class="sr rest"><span class="sd2">SAT</span><span class="sa">Light activity — stretch or walk</span></div>
+        <div class="sr rest"><span class="sd2">SUN</span><span class="sa">Full rest</span></div>
+      </div>
+    </div>
+    <div class="col-r">
+      <p class="lbl reveal">The bottom line</p>
+      <div class="cta-big reveal">Start<br>Monday.</div>
+      <p class="cta-sub reveal">Just show up. The rest takes care of itself.<br>Consistency beats intensity every time.</p>
+      <div class="q-block reveal">
+        <p class="q-text">"The best time to start was 20 years ago.<br>The second best time is now."</p>
+        <p class="q-attr">— Adapted from an ancient proverb</p>
+      </div>
+      <div class="ghost" style="bottom:calc(-1 * clamp(1rem,2vh,2rem)); right:clamp(1rem,3vw,3rem); font-size:clamp(6rem,18vw,14rem);">→</div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* === SLIDE PRESENTATION CONTROLLER ==================================== */
+class SlidePresentation {
+  constructor() {
+    this.slides       = Array.from(document.querySelectorAll('.slide'));
+    this.progressBar  = document.querySelector('.progress-bar');
+    this.counter      = document.querySelector('.slide-ctr');
+    this.navContainer = document.querySelector('.nav-dots');
+    this.current      = 0;
+    this.wheelLock    = false;
+
+    this.buildNavDots();
+    this.setupObserver();
+    this.setupKeyboard();
+    this.setupWheel();
+    this.setupTouch();
+
+    // Activate first slide immediately
+    this.slides[0].classList.add('visible');
+    this.updateUI(0);
+  }
+
+  buildNavDots() {
+    // Always clear first to avoid duplicates if HTML is re-opened
+    this.navContainer.innerHTML = '';
+    this.slides.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'nav-dot';
+      d.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      d.addEventListener('click', () => this.goTo(i));
+      this.navContainer.appendChild(d);
+    });
+  }
+
+  setupObserver() {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          const idx = this.slides.indexOf(entry.target);
+          if (idx !== -1) { this.current = idx; this.updateUI(idx); }
+        }
+      });
+    }, { threshold: 0.55 });
+    this.slides.forEach(s => obs.observe(s));
+  }
+
+  goTo(idx) {
+    if (idx < 0 || idx >= this.slides.length) return;
+    this.slides[idx].scrollIntoView({ behavior: 'smooth' });
+  }
+  next() { this.goTo(this.current + 1); }
+  prev() { this.goTo(this.current - 1); }
+
+  setupKeyboard() {
+    document.addEventListener('keydown', e => {
+      const fwd = ['ArrowDown','ArrowRight',' ','PageDown'];
+      const bwd = ['ArrowUp','ArrowLeft','PageUp'];
+      if (fwd.includes(e.key)) { e.preventDefault(); this.next(); }
+      if (bwd.includes(e.key)) { e.preventDefault(); this.prev(); }
+    });
+  }
+
+  setupWheel() {
+    document.addEventListener('wheel', e => {
+      e.preventDefault();
+      if (this.wheelLock) return;
+      this.wheelLock = true;
+      if (e.deltaY > 0) this.next(); else this.prev();
+      setTimeout(() => { this.wheelLock = false; }, 850);
+    }, { passive: false });
+  }
+
+  setupTouch() {
+    let startY = 0;
+    document.addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, { passive: true });
+    document.addEventListener('touchend', e => {
+      const diff = startY - e.changedTouches[0].clientY;
+      if (Math.abs(diff) > 50) { if (diff > 0) this.next(); else this.prev(); }
+    }, { passive: true });
+  }
+
+  updateUI(idx) {
+    // Progress bar
+    if (this.progressBar) {
+      this.progressBar.style.width = ((idx + 1) / this.slides.length * 100) + '%';
+    }
+    // Counter
+    if (this.counter) {
+      const n = String(idx + 1).padStart(2,'0');
+      const t = String(this.slides.length).padStart(2,'0');
+      this.counter.textContent = `${n} / ${t}`;
+    }
+    // Nav dots
+    document.querySelectorAll('.nav-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === idx);
+    });
+  }
+}
+
+new SlidePresentation();
+</script>
+</body>
+</html>
